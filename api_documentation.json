@@ -1,0 +1,171 @@
+{
+    "api": {
+        "baseUrl": "http://localhost:5000/api/auth",
+        "endpoints": [
+            {
+                "url": "/signup",
+                "method": "POST",
+                "description": "Create a new user account",
+                "request": {
+                    "payload": {
+                        "username": "string",
+                        "email": "string@example.com",
+                        "password": "string"
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "User created successfully",
+                        "payload": {
+                            "status": 201,
+                            "message": "User created successfully",
+                            "user": {
+                                "username": "string",
+                                "email": "string@example.com"
+                            }
+                        }
+                    },
+                    "409": {
+                        "description": "User already exists with this email",
+                        "payload": {
+                            "status": 409,
+                            "message": "User already exists with this email"
+                        }
+                    },
+                    "500": {
+                        "description": "Error creating user",
+                        "payload": {
+                            "status": 500,
+                            "message": "Error creating user",
+                            "error": "error message"
+                        }
+                    }
+                }
+            },
+            {
+                "url": "/signin",
+                "method": "POST",
+                "description": "Authenticate an existing user",
+                "request": {
+                    "payload": {
+                        "email": "string@example.com",
+                        "password": "string"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Signin successful",
+                        "payload": {
+                            "status": 200,
+                            "message": "Signin successful",
+                            "token": "your_jwt_token",
+                            "user": {
+                                "username": "string",
+                                "email": "string@example.com"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid password",
+                        "payload": {
+                            "status": 401,
+                            "message": "Invalid password"
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "payload": {
+                            "status": 404,
+                            "message": "User not found"
+                        }
+                    },
+                    "500": {
+                        "description": "Error signing in",
+                        "payload": {
+                            "status": 500,
+                            "message": "Error signing in",
+                            "error": "error message"
+                        }
+                    }
+                }
+            },
+            {
+                "url": "/forgot-password",
+                "method": "POST",
+                "description": "Generate a new password and send it to the user's email",
+                "request": {
+                    "payload": {
+                        "email": "string@example.com"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "New password has been sent to your email",
+                        "payload": {
+                            "status": 200,
+                            "message": "New password has been sent to your email"
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "payload": {
+                            "status": 404,
+                            "message": "User not found"
+                        }
+                    },
+                    "500": {
+                        "description": "Error processing request",
+                        "payload": {
+                            "status": 500,
+                            "message": "Error processing request",
+                            "error": "error message"
+                        }
+                    }
+                }
+            },
+            {
+                "url": "/change-password",
+                "method": "POST",
+                "description": "Change user password after verifying current password",
+                "request": {
+                    "payload": {
+                        "email": "string@example.com",
+                        "currentPassword": "current_password",
+                        "newPassword": "new_secure_password"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Password updated successfully",
+                        "payload": {
+                            "status": 200,
+                            "message": "Password updated successfully"
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "payload": {
+                            "status": 404,
+                            "message": "User not found"
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid current password",
+                        "payload": {
+                            "status": 401,
+                            "message": "Invalid current password"
+                        }
+                    },
+                    "500": {
+                        "description": "Error updating password",
+                        "payload": {
+                            "status": 500,
+                            "message": "Error updating password",
+                            "error": "error message"
+                        }
+                    }
+                }
+            }
+        ]
+    }
+}
